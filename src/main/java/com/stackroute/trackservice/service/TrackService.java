@@ -8,6 +8,7 @@ import java.util.Optional;
 public interface TrackService  {
 
     public Track saveTrack(Track track);
+    public List<Track> getByName(String name);
     public Track getById(int id);
     public List<Track> getAllTracks();
     public Track deleteTrackById(int id);

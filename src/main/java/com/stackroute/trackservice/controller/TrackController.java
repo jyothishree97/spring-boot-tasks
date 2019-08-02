@@ -12,8 +12,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("api/v1")
-public class TrackController
-{
+public class TrackController {
     private TrackService trackService;
 
     public TrackController() {
@@ -25,35 +24,40 @@ public class TrackController
     }
 
     @PostMapping("track")
-    public ResponseEntity<?> setTrack(@RequestBody Track track){
-        Track savedTrack=trackService.saveTrack(track);
+    public ResponseEntity<?> setTrack(@RequestBody Track track) {
+        Track savedTrack = trackService.saveTrack(track);
         return new ResponseEntity<>(savedTrack, HttpStatus.OK);
     }
 
+    @GetMapping("track/{name}")
+    public ResponseEntity<?> getTrackByName(@PathVariable String name) {
+        List<Track> obtainedTrack = trackService.getByName(name);
+        return new ResponseEntity<>(obtainedTrack, HttpStatus.OK);
+    }
+
     @GetMapping("track/{id}")
-    public  ResponseEntity<?>  getTrackById(@PathVariable int id){
-        Track obtainedTrack=trackService.getById(id);
+    public ResponseEntity<?> getTrackById(@PathVariable int id) {
+        Track obtainedTrack = trackService.getById(id);
         return new ResponseEntity<>(obtainedTrack, HttpStatus.OK);
     }
 
     @GetMapping("tracks")
-    public ResponseEntity<?> getAllTracks()
-    {
-        List<Track> trackList=trackService.getAllTracks();
-        return new ResponseEntity<>(trackList,HttpStatus.OK);
+    public ResponseEntity<?> getAllTracks() {
+        List<Track> trackList = trackService.getAllTracks();
+        return new ResponseEntity<>(trackList, HttpStatus.OK);
     }
 
     @DeleteMapping("track/{id}")
-    public ResponseEntity<?> deleteTrackById(@PathVariable int id){
-        Track deletedTrack=trackService.deleteTrackById(id);
-        return new ResponseEntity<>(deletedTrack,HttpStatus.OK);
+    public ResponseEntity<?> deleteTrackById(@PathVariable int id) {
+        Track deletedTrack = trackService.deleteTrackById(id);
+        return new ResponseEntity<>(deletedTrack, HttpStatus.OK);
     }
+
     @PutMapping("track")
-    public ResponseEntity<?> trackUpdate(@RequestBody Track track)
-    {
+    public ResponseEntity<?> trackUpdate(@RequestBody Track track) {
         ResponseEntity responseEntity;
-        Track trackupdated=trackService.UpdateTrack(track);
-        responseEntity=new ResponseEntity("successfully updated",HttpStatus.CREATED);
+        Track trackupdated = trackService.UpdateTrack(track);
+        responseEntity = new ResponseEntity("successfully updated", HttpStatus.CREATED);
         return responseEntity;
     }
 }
