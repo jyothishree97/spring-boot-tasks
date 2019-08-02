@@ -16,7 +16,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
         @Bean
         public Docket api() {
             return new Docket(DocumentationType.SWAGGER_2)
-                    //select() method returns an instance of ApiSelectorBuilder,which provides a way to control the endpoints exposed by Swagger.
+                    //select() method returns an instance of ApiSelectorBuilder.
                     .select()
                     .apis(RequestHandlerSelectors.any())//any() for both will make documentation for entire API available through Swagger
                     .paths(PathSelectors.any())
