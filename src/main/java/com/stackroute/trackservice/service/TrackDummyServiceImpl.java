@@ -6,7 +6,7 @@ import com.stackroute.trackservice.exception.TrackNotFoundException;
 import com.stackroute.trackservice.repository.TrackRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.stereotype.Component;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,7 +14,6 @@ import java.util.List;
 
 @Service
 @Qualifier
-
 public class TrackDummyServiceImpl implements TrackService {
 
     private TrackRepository trackRepository;
