@@ -35,8 +35,8 @@ public class TrackController {
     }
 
     @GetMapping("tracks/{name}")
-    public ResponseEntity<?> getTrackByName(@PathVariable String name) throws TrackNotFoundException {
-        List<Track> trackDetails = trackService.getTrackByName(name);
+    public ResponseEntity<?> findByName(@PathVariable String name) throws TrackNotFoundException {
+        List<Track> trackDetails = trackService.findByName(name);
         return new ResponseEntity(trackDetails, HttpStatus.OK);
     }
 

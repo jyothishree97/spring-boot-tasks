@@ -28,7 +28,7 @@ public class TrackDummyServiceImpl implements TrackService {
     }
 
     @Override
-    public List<Track> getTrackByName(String name) throws TrackNotFoundException {
+    public List<Track> findByName(String name) throws TrackNotFoundException {
         return null;
     }
 

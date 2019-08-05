@@ -11,7 +11,7 @@ public interface TrackService {
 
     public Track saveTrack(Track track) throws TrackAlreadyExistsException;
 
-    public List<Track> getTrackByName(String name) throws TrackNotFoundException;
+    public List<Track> findByName(String name) throws TrackNotFoundException;
 
     public Track getById(int id) throws TrackNotFoundException;
 
