@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Profile("prod")
+
 @Service
 @Qualifier
 public class TrackDummyServiceImpl implements TrackService {
@@ -32,6 +32,7 @@ public class TrackDummyServiceImpl implements TrackService {
         return null;
     }
 
+    @Profile("prod")
     @Override
     public Track getById(int id) throws TrackNotFoundException {
         return null;

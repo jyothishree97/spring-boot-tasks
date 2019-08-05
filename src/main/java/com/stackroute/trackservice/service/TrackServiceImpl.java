@@ -12,10 +12,9 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 
-
 @Service
 @Primary
-@Profile("dev")
+
 public class TrackServiceImpl implements TrackService {
 
     private TrackRepository trackRepository;
@@ -47,6 +46,7 @@ public class TrackServiceImpl implements TrackService {
         }
     }
 
+    @Profile("dev")
     @Override
     public List<Track> getTrackByName(String name) throws TrackNotFoundException {
         if (trackRepository.findByName(name).isEmpty()) {

@@ -13,4 +13,7 @@ public interface TrackRepository extends JpaRepository<Track, Integer> {
     // @Query annotation used to create our own query with a suitable method name.
     @Query(value = "select * from Track where name =?", nativeQuery = true)
     public List<Track> findByName(String name);
+
+    @Query(value =" select * from Track where id=?",nativeQuery = true)
+    public Track getById(int id);
 }
