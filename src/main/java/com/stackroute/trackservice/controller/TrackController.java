@@ -11,19 +11,16 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("api/v1")
 public class TrackController {
+
     private TrackService trackService;
 
     public TrackController() {
     }
-    @Autowired
-    public void trackDummyService(@Qualifier("dummy") TrackService trackService){
-        this.trackService=trackService;
-    }
+
 
     @Autowired
     public TrackController(TrackService trackService) {

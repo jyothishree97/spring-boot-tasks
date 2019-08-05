@@ -5,6 +5,8 @@ import com.stackroute.trackservice.exception.TrackAlreadyExistsException;
 import com.stackroute.trackservice.exception.TrackNotFoundException;
 import com.stackroute.trackservice.repository.TrackRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Primary;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -12,6 +14,8 @@ import java.util.Optional;
 
 
 @Service
+@Primary
+
 public class TrackServiceImpl implements TrackService {
 
     private TrackRepository trackRepository;

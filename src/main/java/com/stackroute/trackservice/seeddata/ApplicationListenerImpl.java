@@ -11,6 +11,14 @@ import org.springframework.stereotype.Component;
 @Component
 public class ApplicationListenerImpl implements ApplicationListener {
 
+    @Value("${track.id}")
+    private int id;
+    @Value("${track.name}")
+    private String name;
+    @Value("${track.comments}")
+    private String comments;
+
+    Track track=new Track();
     private TrackRepository trackRepository;
     @Autowired
     public ApplicationListenerImpl(TrackRepository trackRepository) {
@@ -18,10 +26,10 @@ public class ApplicationListenerImpl implements ApplicationListener {
     }
     @Override
     public void onApplicationEvent(ApplicationEvent applicationEvent) {
-        Track track1=new Track(11,"ramya","good track");
-        trackRepository.save(track1);
-        Track track2=new Track(12,"jyothi","good");
-        trackRepository.save(track2);
 
+        track.setId(id);
+        track.setName(name);
+        track.setComments(comments);
+        trackRepository.save(track);
     }
 }

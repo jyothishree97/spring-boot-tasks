@@ -4,16 +4,21 @@ import com.stackroute.trackservice.domain.Track;
 import com.stackroute.trackservice.exception.TrackAlreadyExistsException;
 import com.stackroute.trackservice.exception.TrackNotFoundException;
 import com.stackroute.trackservice.repository.TrackRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+
 @Service
 @Qualifier
+
 public class TrackDummyServiceImpl implements TrackService {
 
     private TrackRepository trackRepository;
+    @Autowired
     public TrackDummyServiceImpl(TrackRepository trackRepository) {
         this.trackRepository = trackRepository;
     }
