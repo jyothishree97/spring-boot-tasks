@@ -14,6 +14,8 @@ import org.springframework.test.context.junit4.SpringRunner;
 import java.util.List;
 
 import static org.junit.Assert.*;
+import static org.mockito.Mockito.verify;
+import static org.mockito.internal.verification.VerificationModeFactory.times;
 
 @RunWith(SpringRunner.class)
 //@RunWith(SpringRunner.class) class annotation used to tell JUnit to run the unit tests in Spring's testing supports
@@ -44,8 +46,9 @@ public class TrackRepositoryTest {
     public void testSaveTrack() {
         trackRepository.save(track);
         Track fetchTrack = trackRepository.findById(track.getId());
-        Assert.assertEquals(21, fetchTrack.getId());
-
+        Assert.assertEquals(track, fetchTrack);
+        //verify here verifies that userRepository save method is only called once
+        //verify(trackRepository, times(1));
     }
 
     @Test

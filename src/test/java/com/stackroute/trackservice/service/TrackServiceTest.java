@@ -10,16 +10,11 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
-import org.mockito.internal.verification.Times;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Properties;
 
-
-import static org.junit.Assert.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -68,6 +63,8 @@ public class TrackServiceTest {
         when(trackRepository.save((Track) any())).thenReturn(null);
         Track savedTrack = trackService.saveTrack(track);
         System.out.println("savedTrack" + savedTrack);
+        //verify here verifies that userRepository save method is only called once
+        verify(trackRepository, times(1)).save(track);
     }
 
     @Test
@@ -77,6 +74,8 @@ public class TrackServiceTest {
         when(trackRepository.findAll()).thenReturn(list);
         List<Track> trackList = trackService.getAllTracks();
         Assert.assertEquals(list, trackList);
+        //verify here verifies that userRepository save method is only called once
+        verify(trackRepository, times(1)).save(track);
     }
 
     @Test
@@ -88,6 +87,8 @@ public class TrackServiceTest {
         when(trackRepository.findById(10)).thenReturn(track);
         Track track1 = trackService.getById(10);
         Assert.assertEquals(track, track1);
+        //verify here verifies that userRepository findById method is only called once
+        verify(trackRepository, times(1)).findById(10);
     }
 
     @Test
@@ -96,6 +97,8 @@ public class TrackServiceTest {
         when(trackRepository.findByName(any())).thenReturn((list));
         List<Track> fetchTrack = trackService.findByName("rajvishnu");
         Assert.assertEquals(list, fetchTrack);
+       //verify here verifies that userRepository findByName method is called twice
+        verify(trackRepository,times(2)).findByName(any());
 
     }
 
@@ -107,6 +110,9 @@ public class TrackServiceTest {
         when(trackRepository.findById(61)).thenReturn((track));
         Track deleteTrackById = trackService.getById(61);
         Assert.assertEquals(track, deleteTrackById);
+        //verify here verifies that userRepository findById method is only called once
+        verify(trackRepository, times(1)).findById(61);
+
     }
 
     @Test
@@ -117,5 +123,7 @@ public class TrackServiceTest {
         when(trackRepository.save(track)).thenReturn(track);
         Track updateTrackById = trackService.saveTrack(track);
         Assert.assertEquals(track, updateTrackById);
+        //verify here verifies that userRepository save method is only called once
+        verify(trackRepository, times(1)).save(track);
     }
 }

@@ -26,7 +26,7 @@ import java.util.List;
 
 import static org.junit.Assert.*;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @RunWith(SpringRunner.class)
 //@RunWith(SpringRunner.class) class annotation used to tell JUnit to run the unit tests in Spring's testing supports
@@ -67,6 +67,7 @@ public class TrackControllerTest {
                 .contentType(MediaType.APPLICATION_JSON).content(asJsonString(track)))
                 .andExpect(MockMvcResultMatchers.status().isCreated())
                 .andDo(MockMvcResultHandlers.print());
+        verify(trackService,times(1)).saveTrack(any());
     }
 
     @Test
@@ -76,6 +77,7 @@ public class TrackControllerTest {
                 .contentType(MediaType.APPLICATION_JSON).content(asJsonString(track)))
                 .andExpect(MockMvcResultMatchers.status().isConflict())
                 .andDo(MockMvcResultHandlers.print());
+        verify(trackService,times(1)).saveTrack(track);
     }
 
     @Test
@@ -85,6 +87,7 @@ public class TrackControllerTest {
                 .contentType(MediaType.APPLICATION_JSON).content(asJsonString(track)))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andDo(MockMvcResultHandlers.print());
+        verify(trackService,times(1)).getById(1);
     }
 
 
@@ -95,6 +98,7 @@ public class TrackControllerTest {
                 .contentType(MediaType.APPLICATION_JSON).content(asJsonString(list)))
                 .andExpect(MockMvcResultMatchers.status().isFound())
                 .andDo(MockMvcResultHandlers.print());
+        verify(trackService,times(1)).findByName(any());
     }
 
     @Test
@@ -104,6 +108,7 @@ public class TrackControllerTest {
                 .contentType(MediaType.APPLICATION_JSON).content(asJsonString(track)))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andDo(MockMvcResultHandlers.print());
+//        verify(trackService,times(2)).getById(1);
     }
 
     @Test
@@ -113,6 +118,7 @@ public class TrackControllerTest {
                 .contentType(MediaType.APPLICATION_JSON).content(asJsonString(track)))
                 .andExpect(MockMvcResultMatchers.status().isFound())
                 .andDo(MockMvcResultHandlers.print());
+//        verify(trackService,times(1));
     }
 
     @Test
@@ -122,6 +128,7 @@ public class TrackControllerTest {
                 .contentType(MediaType.APPLICATION_JSON).content(asJsonString(track)))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andDo(MockMvcResultHandlers.print());
+        verify(trackService,times(1)).getAllTracks();
     }
 
     private static String asJsonString(final Object obj) {
