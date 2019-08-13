@@ -5,6 +5,7 @@ import com.stackroute.trackservice.domain.Track;
 import com.stackroute.trackservice.exception.GlobalException;
 import com.stackroute.trackservice.exception.TrackAlreadyExistsException;
 import com.stackroute.trackservice.service.TrackService;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -60,8 +61,14 @@ public class TrackControllerTest {
         list.add(track);
     }
 
+    @After
+    public void tearDown() throws Exception {
+        track=null;
+        list=null;
+    }
+
     @Test
-    public void saveTrack() throws Exception {
+    public void giveninputshouldReturnsaveTrack() throws Exception {
         when(trackService.saveTrack(any())).thenReturn(track);
         mockMvc.perform(MockMvcRequestBuilders.post("/api/v1/track")
                 .contentType(MediaType.APPLICATION_JSON).content(asJsonString(track)))
@@ -71,7 +78,7 @@ public class TrackControllerTest {
     }
 
     @Test
-    public void saveUserFailure() throws Exception {
+    public void givenInputShouldReturnsaveUserFailure() throws Exception {
         when(trackService.saveTrack(any())).thenThrow(TrackAlreadyExistsException.class);
         mockMvc.perform(MockMvcRequestBuilders.post("/api/v1/track")
                 .contentType(MediaType.APPLICATION_JSON).content(asJsonString(track)))
@@ -81,7 +88,7 @@ public class TrackControllerTest {
     }
 
     @Test
-    public void getTrackById() throws Exception {
+    public void givenInputShouldgetTrackById() throws Exception {
         when(trackService.getById(1)).thenReturn(null);
         mockMvc.perform(MockMvcRequestBuilders.get("/api/v1/track/1")
                 .contentType(MediaType.APPLICATION_JSON).content(asJsonString(track)))
@@ -92,7 +99,7 @@ public class TrackControllerTest {
 
 
     @Test
-    public void findByName() throws Exception {
+    public void givenStringShouldfindByName() throws Exception {
         when(trackService.findByName("RajVishnu")).thenReturn(null);
         mockMvc.perform(MockMvcRequestBuilders.get("/api/v1/tracks/name")
                 .contentType(MediaType.APPLICATION_JSON).content(asJsonString(list)))
@@ -102,7 +109,7 @@ public class TrackControllerTest {
     }
 
     @Test
-    public void deleteTrackById() throws Exception {
+    public void givenIntegerShoulddeleteTrackById() throws Exception {
         when(trackService.deleteTrackById(1)).thenReturn(track);
         mockMvc.perform(MockMvcRequestBuilders.get("/api/v1/track/1")
                 .contentType(MediaType.APPLICATION_JSON).content(asJsonString(track)))
@@ -112,7 +119,7 @@ public class TrackControllerTest {
     }
 
     @Test
-    public void trackUpdatedById() throws Exception {
+    public void givenInputShouldUpdatetrackUpdatedById() throws Exception {
         when(trackService.updateTrackById(1, track)).thenReturn(track);
         mockMvc.perform(MockMvcRequestBuilders.get("/api/v1/tracks/1")
                 .contentType(MediaType.APPLICATION_JSON).content(asJsonString(track)))
@@ -122,7 +129,7 @@ public class TrackControllerTest {
     }
 
     @Test
-    public void getAllTracks() throws Exception {
+    public void givenInputshouldReturngetAllTracks() throws Exception {
         when(trackService.getAllTracks()).thenReturn(list);
         mockMvc.perform(MockMvcRequestBuilders.get("/api/v1/tracks")
                 .contentType(MediaType.APPLICATION_JSON).content(asJsonString(track)))

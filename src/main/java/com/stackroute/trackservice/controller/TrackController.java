@@ -42,7 +42,7 @@ public class TrackController {
     @GetMapping("track/{id}")
     public ResponseEntity<?> getTrackById(@PathVariable int id) throws TrackNotFoundException {
         Track trackDetails = trackService.getById(id);
-        return new ResponseEntity(trackDetails, HttpStatus.OK);
+        return new ResponseEntity(trackDetails, HttpStatus.FOUND);
     }
 
     @GetMapping("tracks")
@@ -50,7 +50,7 @@ public class TrackController {
         ResponseEntity responseEntity;
 
         List<Track> trackDetails = trackService.getAllTracks();
-        return new ResponseEntity(trackDetails, HttpStatus.OK);
+        return new ResponseEntity(trackDetails, HttpStatus.FOUND);
 
 
     }

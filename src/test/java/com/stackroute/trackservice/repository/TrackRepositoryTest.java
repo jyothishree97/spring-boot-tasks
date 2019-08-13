@@ -43,7 +43,7 @@ public class TrackRepositoryTest {
     }
 
     @Test
-    public void testSaveTrack() {
+    public void givenInputShouldReturntestSaveTrack() {
         trackRepository.save(track);
         Track fetchTrack = trackRepository.findById(track.getId());
         Assert.assertEquals(track, fetchTrack);
@@ -52,21 +52,21 @@ public class TrackRepositoryTest {
     }
 
     @Test
-    public void findByName() {
+    public void givenInputShouldReturnfindByName() {
 //        trackRepository.save(track);
         List<Track> fetchTrack = trackRepository.findByName("Rajkumar");
         Assert.assertEquals("Rajkumar", track.getName());
     }
 
     @Test
-    public void findById() {
+    public void givenInputShouldReturnfindById() {
 //        trackRepository.save(track);
         Track fetchTrack = trackRepository.findById(track.getId());
         Assert.assertEquals(21, track.getId());
     }
 
     @Test
-    public void testSaveTrackFailure() {
+    public void givenInputShouldReturntestSaveTrackFailure() {
         Track testtrack = new Track(41, "vishnu", "good");
 //        trackRepository.save(track);
         Track fetchTrack = trackRepository.findById(track.getId());

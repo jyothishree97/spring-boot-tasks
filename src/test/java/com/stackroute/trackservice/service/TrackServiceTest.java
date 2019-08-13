@@ -5,6 +5,7 @@ import com.stackroute.trackservice.exception.TrackAlreadyExistsException;
 import com.stackroute.trackservice.exception.TrackNotFoundException;
 import com.stackroute.trackservice.repository.TrackRepository;
 import org.apache.catalina.User;
+import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -44,10 +45,15 @@ public class TrackServiceTest {
         list.add(track);
 
     }
+    @After
+    public void tearDown() throws Exception {
+        track=null;
+        list=null;
+    }
 
 
     @Test
-    public void saveTrackTestSuccess() throws TrackAlreadyExistsException {
+    public void givenInputShouldReturnsaveTrackTestSuccess() throws TrackAlreadyExistsException {
 
         when(trackRepository.save((Track) any())).thenReturn(track);
         Track savedTrack = trackService.saveTrack(track);
@@ -59,7 +65,7 @@ public class TrackServiceTest {
 
 
     @Test(expected = TrackAlreadyExistsException.class)
-    public void saveUserTestFailure() throws TrackAlreadyExistsException {
+    public void givenInputSholudReturnsaveUserTestFailure() throws TrackAlreadyExistsException {
         when(trackRepository.save((Track) any())).thenReturn(null);
         Track savedTrack = trackService.saveTrack(track);
         System.out.println("savedTrack" + savedTrack);
@@ -68,7 +74,7 @@ public class TrackServiceTest {
     }
 
     @Test
-    public void getAllTracks() throws Exception {
+    public void givenInputShouldReturngetAllTracks() throws Exception {
         trackRepository.save(track);
         //stubbing the mock to return specific data
         when(trackRepository.findAll()).thenReturn(list);
@@ -79,7 +85,7 @@ public class TrackServiceTest {
     }
 
     @Test
-    public void getById() throws TrackNotFoundException {
+    public void givenInputShouldReturngetById() throws TrackNotFoundException {
         trackRepository.save(track);
         //stubbing the mock to return specific data
         //First, it will check id exists or not if exists and executes next otherwise throws exception
@@ -92,7 +98,7 @@ public class TrackServiceTest {
     }
 
     @Test
-    public void findByName() throws TrackNotFoundException {
+    public void givenInputShouldReturnfindByName() throws TrackNotFoundException {
         //stubbing the mock to return specific data
         when(trackRepository.findByName(any())).thenReturn((list));
         List<Track> fetchTrack = trackService.findByName("rajvishnu");
@@ -103,7 +109,7 @@ public class TrackServiceTest {
     }
 
     @Test
-    public void deleteTrackById() throws TrackNotFoundException {
+    public void givenInputShouldDeletedeleteTrackById() throws TrackNotFoundException {
         //stubbing the mock to return specific data
         //First, it will check id exists or not if exists and executes next otherwise throws exception
         when(trackRepository.existsById(61)).thenReturn(true);
@@ -116,7 +122,7 @@ public class TrackServiceTest {
     }
 
     @Test
-    public void updateTrackById() throws TrackAlreadyExistsException {
+    public void givenInputShouldReturnupdateTrackById() throws TrackAlreadyExistsException {
         //stubbing the mock to return specific data
         //First, it will check id exists or not if exists and executes next otherwise throws exception
         when(trackRepository.existsById(101)).thenReturn(true);
